@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import Item from './component/Item';
+import { Box, HStack } from '@chakra-ui/react'
+import axios from "axios";
 
-function App() {
+const App = () => {
+  const [items, setItems] = useState([]);
+
+  const fetch = async () => {
+    const response = await axios.get('http://localhost:3010/items');
+    setItems(response.data);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box m={10}>
+      <HStack spacing='24px'>
+        {items.map((item, index) => {
+          return (
+            <Item
+              key={index}
+              index={index}
+              name={item.name}
+              detail={item.detail}
+            />
+          );
+        })}
+      </HStack>
+    </Box>
   );
 }
 
