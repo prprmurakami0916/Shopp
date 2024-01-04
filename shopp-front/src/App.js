@@ -3,6 +3,7 @@ import './App.css';
 import Item from './component/Item';
 import { Box, HStack } from '@chakra-ui/react'
 import axios from "axios";
+import Header from './component/Header';
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -17,20 +18,23 @@ const App = () => {
   }, []);
 
   return (
-    <Box m={10}>
-      <HStack spacing='24px'>
-        {items.map((item, index) => {
-          return (
-            <Item
-              key={index}
-              index={index}
-              name={item.name}
-              detail={item.detail}
-            />
-          );
-        })}
-      </HStack>
-    </Box>
+    <>
+      <Header />
+    </>
+    // <Box m={10}>
+    //   <HStack spacing='24px'>
+    //     {items.map((item, index) => {
+    //       return (
+    //         <Item
+    //           key={index}
+    //           index={index}
+    //           name={item.name}
+    //           detail={item.detail}
+    //         />
+    //       );
+    //     })}
+    //   </HStack>
+    // </Box>
   );
 }
 
